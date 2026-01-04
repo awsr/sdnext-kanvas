@@ -3,6 +3,7 @@ import path from 'node:path';
 import { includeIgnoreFile } from '@eslint/compat';
 import css from '@eslint/css';
 import js from '@eslint/js';
+import html from '@html-eslint/eslint-plugin';
 import { configs, helpers, plugins } from 'eslint-config-airbnb-extended';
 import pluginPromise from 'eslint-plugin-promise';
 import { defineConfig, globalIgnores } from 'eslint/config';
@@ -207,46 +208,46 @@ const cssConfig = defineConfig([
   },
 ]);
 
-// const htmlConfig = defineConfig([
-//   {
-//     files: ['**/*.html'],
-//     plugins: {
-//       html,
-//     },
-//     extends: ['html/recommended'],
-//     language: 'html/html',
-//     rules: {
-//       'html/attrs-newline': 'off',
-//       'html/element-newline': [
-//         'error',
-//         {
-//           inline: ['$inline'],
-//         },
-//       ],
-//       'html/indent': [
-//         'warn',
-//         2,
-//       ],
-//       'html/no-duplicate-class': 'error',
-//       'html/no-extra-spacing-attrs': [
-//         'error',
-//         {
-//           enforceBeforeSelfClose: true,
-//           disallowMissing: true,
-//           disallowTabs: true,
-//           disallowInAssignment: true,
-//         },
-//       ],
-//       'html/require-closing-tags': [
-//         'error',
-//         {
-//           selfClosing: 'always',
-//         },
-//       ],
-//       'html/use-baseline': 'off',
-//     },
-//   },
-// ]);
+const htmlConfig = defineConfig([
+  {
+    files: ['**/*.html'],
+    plugins: {
+      html,
+    },
+    extends: ['html/recommended'],
+    language: 'html/html',
+    rules: {
+      'html/attrs-newline': 'off',
+      'html/element-newline': [
+        'error',
+        {
+          inline: ['$inline'],
+        },
+      ],
+      'html/indent': [
+        'warn',
+        2,
+      ],
+      'html/no-duplicate-class': 'error',
+      'html/no-extra-spacing-attrs': [
+        'error',
+        {
+          enforceBeforeSelfClose: true,
+          disallowMissing: true,
+          disallowTabs: true,
+          disallowInAssignment: true,
+        },
+      ],
+      'html/require-closing-tags': [
+        'error',
+        {
+          selfClosing: 'always',
+        },
+      ],
+      'html/use-baseline': 'off',
+    },
+  },
+]);
 
 export default defineConfig([
   // Ignore files and folders listed in .gitignore
@@ -260,5 +261,5 @@ export default defineConfig([
   // ...jsonConfig,
   // ...markdownConfig,
   ...cssConfig,
-  // ...htmlConfig,
+  ...htmlConfig,
 ]);
