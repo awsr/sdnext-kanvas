@@ -16,6 +16,12 @@ const jsConfig = defineConfig([
     name: 'js/config',
     files: helpers.extensions.allFiles,
     ...js.configs.recommended,
+    languageOptions: {
+      ecmaVersion: 'latest',
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
   },
   pluginPromise.configs['flat/recommended'],
   // Stylistic plugin
@@ -27,6 +33,10 @@ const jsConfig = defineConfig([
   {
     files: helpers.extensions.allFiles,
     languageOptions: {
+      ecmaVersion: 'latest',
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
       globals: {
         ...globals.browser,
       },
