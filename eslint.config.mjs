@@ -1,12 +1,12 @@
 import path from 'node:path';
 
 import { includeIgnoreFile } from '@eslint/compat';
-import js from '@eslint/js';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import { configs, helpers, plugins } from 'eslint-config-airbnb-extended';
-import globals from 'globals';
 import css from '@eslint/css';
+import js from '@eslint/js';
+import { configs, helpers, plugins } from 'eslint-config-airbnb-extended';
 import pluginPromise from 'eslint-plugin-promise';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import globals from 'globals';
 
 const gitignorePath = path.resolve('.', '.gitignore');
 
@@ -140,12 +140,59 @@ const typescriptConfig = defineConfig([
   },
 ]);
 
+// const nodeConfig = defineConfig([
+//   // Node plugin
+//   plugins.node,
+//   {
+//     name: 'sdnext/node',
+//     files: ['**/cli/*.js'],
+//     languageOptions: {
+//       globals: {
+//         ...globals.node,
+//       },
+//     },
+//     rules: {
+//       // Import as rule sets to override the `files` setting from default config
+//       ...rules.node.base.rules,
+//       ...rules.node.globals.rules,
+//       ...rules.node.noUnsupportedFeatures.rules,
+//       ...rules.node.promises.rules,
+//       'n/no-sync': 'off',
+//       'n/no-process-exit': 'off',
+//       'n/hashbang': 'off',
+//     },
+//   },
+// ]);
+
+// const jsonConfig = defineConfig([
+//   {
+//     files: ['**/*.json'],
+//     ignores: ['package-lock.json'],
+//     plugins: { json },
+//     language: 'json/json',
+//     extends: ['json/recommended'],
+//   },
+// ]);
+
+// const markdownConfig = defineConfig([
+//   {
+//     files: ['**/*.md'],
+//     plugins: { markdown },
+//     language: 'markdown/gfm',
+//     processor: 'markdown/markdown',
+//     extends: ['markdown/recommended'],
+//   },
+// ]);
+
 const cssConfig = defineConfig([
   {
     files: ['**/*.css'],
     language: 'css/css',
     plugins: { css },
     extends: ['css/recommended'],
+    // languageOptions: {
+    //   tolerant: true,
+    // },
     rules: {
       'css/font-family-fallbacks': 'off',
       'css/no-invalid-properties': [
@@ -155,15 +202,51 @@ const cssConfig = defineConfig([
         },
       ],
       'css/no-important': 'off',
-      'css/use-baseline': [
-        'warn',
-        {
-          available: 'newly',
-        },
-      ],
+      'css/use-baseline': 'off',
     },
   },
 ]);
+
+// const htmlConfig = defineConfig([
+//   {
+//     files: ['**/*.html'],
+//     plugins: {
+//       html,
+//     },
+//     extends: ['html/recommended'],
+//     language: 'html/html',
+//     rules: {
+//       'html/attrs-newline': 'off',
+//       'html/element-newline': [
+//         'error',
+//         {
+//           inline: ['$inline'],
+//         },
+//       ],
+//       'html/indent': [
+//         'warn',
+//         2,
+//       ],
+//       'html/no-duplicate-class': 'error',
+//       'html/no-extra-spacing-attrs': [
+//         'error',
+//         {
+//           enforceBeforeSelfClose: true,
+//           disallowMissing: true,
+//           disallowTabs: true,
+//           disallowInAssignment: true,
+//         },
+//       ],
+//       'html/require-closing-tags': [
+//         'error',
+//         {
+//           selfClosing: 'always',
+//         },
+//       ],
+//       'html/use-baseline': 'off',
+//     },
+//   },
+// ]);
 
 export default defineConfig([
   // Ignore files and folders listed in .gitignore
@@ -173,5 +256,9 @@ export default defineConfig([
   ]),
   ...jsConfig,
   ...typescriptConfig,
+  // ...nodeConfig,
+  // ...jsonConfig,
+  // ...markdownConfig,
   ...cssConfig,
+  // ...htmlConfig,
 ]);
